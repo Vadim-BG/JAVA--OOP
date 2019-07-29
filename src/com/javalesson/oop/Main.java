@@ -3,8 +3,8 @@ package com.javalesson.oop;
 public class Main {
     public static void main(String[] args) {
         Dog lab = new Dog();
-        lab.setPaws(4);
-        lab.setTail(1);
+        lab.setPaws(5);
+        lab.setTail(2);
         lab.setName("Charley");
         lab.setBreed("Lab");
 
@@ -17,6 +17,7 @@ public class Main {
 
         System.out.println("Lab's name is "+lab.getName());
         System.out.println("Sheppard's name is "+sheppard.getName());
+        System.out.println("Lab has "+lab.getPaws()+" paws");
 
 
 
