@@ -27,9 +27,16 @@ public class Main {
         //doberman.bark();
         doberman.bite();
 
+        Size s = Size.SMALL;
+        Size s1 = Size.valueOf("BIG");
+        //System.out.println(s1);
 
-        /*System.out.println("Lab's name is "+lab.getName());
-        System.out.println("Sheppard's name is "+sheppard.getName());
-        System.out.println("Lab has "+lab.getPaws()+" paws");*/
+        Size[] values = Size.values();
+        for (int i = 0; i <values.length ; i++) {
+            System.out.println(values[i]);
+
+        }
+
+
     }
 }

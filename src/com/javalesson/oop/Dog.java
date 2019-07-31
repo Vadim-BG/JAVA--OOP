@@ -8,7 +8,7 @@ public class Dog {
     public static final int TAIL = 1;//кол-во хвостов
     private String name;//Имя
     private String breed;//Порода
-    private Size size;//Размер собаки
+    private Size size = Size.UNDEFINED;//Размер собаки
 
     public Dog() {//конструктор
         dogsCount++;
@@ -56,6 +56,8 @@ public class Dog {
             case VERY_SMALL:
                 System.out.println("Tiaf-tiaf");//Если маленькая
                 break;
+            default:
+                System.out.println("Dog's size is undefined");
         }
 
 
