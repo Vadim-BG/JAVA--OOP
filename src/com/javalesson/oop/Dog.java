@@ -79,9 +79,9 @@ public class Dog {
     }
 
     public void bark() {  //Лает
-        if (size.equalsIgnoreCase("Big")) {
+        if ("Big".equalsIgnoreCase(size)) {
             System.out.println("Wof-Wof");//Если большая
-        } else if (size.equalsIgnoreCase("Average")) {
+        } else if ("Average".equalsIgnoreCase(size)) {
             System.out.println("Raf-Raf");//Если средняя
         } else {
             System.out.println("Tiaf-tiaf");//Если маленькая
