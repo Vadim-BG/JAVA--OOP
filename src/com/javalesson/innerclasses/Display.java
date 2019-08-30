@@ -4,17 +4,18 @@ public class Display {
 
     private static final int DISPLAY_HEIGHT = 1920;
     private static final int DISPLAY_WIDTH = 1280;
+    private int x = 0;
 
     public Display() {
         Pixel pixel = new Pixel(10, 10, Color.BLUE);
     }
 
-    public class Pixel {
+    private class Pixel {
         private int x;
         private int y;
         private Color color;
 
-        public Pixel(int x, int y, Color color) {
+        private Pixel(int x, int y, Color color) {
 
             if (0 <= x && x <= DISPLAY_WIDTH && 0 <= y && y <= DISPLAY_HEIGHT) {
                 this.x = x;
@@ -26,6 +27,7 @@ public class Display {
                         ("Coordinates X and Y should be between 0-" + DISPLAY_WIDTH + " and 0-" + DISPLAY_HEIGHT);
             }
         }
+
     }
 
     public enum Color {
