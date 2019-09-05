@@ -1,8 +1,6 @@
 package com.javalesson.exceptions;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -11,7 +9,12 @@ public class ExceptionHandlingMain {
     public static void main(String[] args) {
 
 
+        try {
             doEverything();
+        } catch (InvalidInputParamException e) {
+            System.out.println("InvalidInputParamException");
+            e.printStackTrace();
+        }
 
 
     }
@@ -19,17 +22,17 @@ public class ExceptionHandlingMain {
     private static void doEverything() {
         Scanner scanner = new Scanner(System.in);
         boolean continueLoop = true;
-        PrintWriter writer = null;
+
         do {
-            try {
+            try (PrintWriter writer = new PrintWriter(new FileWriter("out.txt"));
+                 BufferedReader reader = new BufferedReader(new FileReader("1234"))) {
                 System.out.println("Please enter numerator");
                 int numerator = scanner.nextInt();
                 System.out.println("Please enter denominator");
                 int denominator = scanner.nextInt();
 //                System.out.println(divide(numerator, denominator));
-               int[] intArray = new int[1];
-                int i = intArray[2];
-                writer = new PrintWriter(new FileWriter("out.txt"));
+//                int[] intArray = new int[1];
+//                int i = intArray[2];
                 writer.println("Result = " + divide(numerator, denominator));
 
                 continueLoop = false;
@@ -40,15 +43,12 @@ public class ExceptionHandlingMain {
             } catch (IOException e) {
                 System.out.println("Unable to open file");
                 e.printStackTrace();
-            }catch (Exception e){
+            } catch (IndexOutOfBoundsException e) {
                 System.out.println("All Exception here");
-                throw  e;
-            }
-            finally {
+                throw new InvalidInputParamException("Index out of bound. Thrown in doEverything " + e);
+            } finally {
                 System.out.println("Finally block called");
-                if (writer != null) {
-                    writer.close();
-                }
+
             }
             System.out.println("Try catch block finished");
         } while (continueLoop);
