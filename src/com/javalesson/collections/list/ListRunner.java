@@ -58,7 +58,7 @@ public class ListRunner {
                     System.out.println("Please enter a new task");
                     scanner.nextLine();
                     String task6 = scanner.nextLine();
-                    list.addtoListatPosition(index, task6);
+                    list.addToListAtPosition(index, task6);
                     System.out.println("Please choose an action by typing [0-6]");
                     param = scanner.nextInt();
                     break;
