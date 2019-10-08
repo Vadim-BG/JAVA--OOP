@@ -17,13 +17,37 @@ public class CollectionsRunner {
 //            System.out.printf("%-20s %s", deckOfCards.get(i), (i + 1) % 4 == 0 ? "\n" : "  ");
 //        }
         Collections.shuffle(deckOfCards);
-        System.out.println("\n\nCards after shuffle");
-        for (int i = 0; i < deckOfCards.size(); i++) {
-            System.out.printf("%-20s %s", deckOfCards.get(i), (i + 1) % 4 == 0 ? "\n" : "  ");
+        Collections.sort(deckOfCards);
+
+        Card card = new Card(Card.Suit.SPADES, Card.Face.Queen);
+        int i = Collections.binarySearch(deckOfCards, card);
+        if (i >= 0) {
+            System.out.println("Card was found at position " + i);
+        } else {
+            System.out.println("Card was not found");
         }
 
+        List<Card> cardsList = new ArrayList<>(deckOfCards);
+        Collections.fill(cardsList, card);
+        Collections.addAll(cardsList, card, card, card);
+        Collections.copy(cardsList, deckOfCards);
+        int frequency = Collections.frequency(cardsList, card);
+        System.out.println("Frequency of "+card+" is "+frequency);
+
+        System.out.println("MIN :"+Collections.min(cardsList));
+        System.out.println("MAX :"+Collections.max(cardsList));
+
+//        printOutput(cardsList);
+
+//        System.out.println("\n\nCards after shuffle");
+//        printOutput((List<Card>) deckOfCards);
+
         Collections.sort(deckOfCards, new CardComparator());
-        System.out.println("\n\nCards after sorting");
+//        System.out.println("\n\nCards after sorting");
+//        printOutput(deckOfCards);
+    }
+
+    private static void printOutput(List<Card> deckOfCards) {
         for (int i = 0; i < deckOfCards.size(); i++) {
             System.out.printf("%-20s %s", deckOfCards.get(i), (i + 1) % 4 == 0 ? "\n" : "  ");
         }
@@ -70,12 +94,26 @@ public class CollectionsRunner {
         }
 
         @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Card card = (Card) o;
+            return suit == card.suit &&
+                    face == card.face;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(suit, face);
+        }
+
+        @Override
         public String toString() {
             return face + " of " + suit;
         }
     }
 
-    public static class CardComparator implements Comparator<Card>{
+    public static class CardComparator implements Comparator<Card> {
         List<Card.Face> faces = Arrays.asList(Card.Face.values());
 
 
@@ -86,7 +124,7 @@ public class CollectionsRunner {
             } else if (faces.indexOf(card1.getFace()) > faces.indexOf(card2.getFace())) {
                 return -1;
             } else if (faces.indexOf(card1.getFace()) == faces.indexOf(card2.getFace())) {
-                return 0;//String.valueOf(card1.getSuit()).compareTo(String.valueOf(card2.getSuit()));
+                return String.valueOf(card1.getSuit()).compareTo(String.valueOf(card2.getSuit()));
             }
             return 0;
         }
