@@ -1,7 +1,6 @@
 package com.javalesson.collections.set;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class SetRunner {
 
@@ -21,15 +20,20 @@ public class SetRunner {
         europaCars.add(new Car("VW", "Golf", 45));
         europaCars.add(new Car("VW", "Polo", 35));
 
-        Set<Car> uniqueCars = new HashSet<>(sixCars);
+        NavigableSet<Car> uniqueCars = new TreeSet<>(sixCars);
         uniqueCars.addAll(europaCars);
 
-        //print(uniqueCars);
+        SortedSet<Car> cars = uniqueCars.subSet(new Car("Toyota", "Auris", 40), true,
+                new Car("Audi", "A3", 60), true);
 
-        sixCars.retainAll(europaCars);
-        uniqueCars.removeAll(sixCars);
-        //europaCars.removeAll(sixCars);
         print(uniqueCars);
+        System.out.println("Higher");
+        System.out.println(uniqueCars.higher(new Car("Toyota", "Auris", 40)));
+        System.out.println("Lower");
+        System.out.println(uniqueCars.lower(new Car("Toyota", "Auris", 40)));
+
+        System.out.println("Floor");
+        System.out.println(uniqueCars.floor(new Car("Toyota", "Auris", 39)));
 
 
     }
