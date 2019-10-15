@@ -1,7 +1,7 @@
 package com.javalesson.collections.set;
 
 
-public class Car implements Comparable<Car> {
+public final class Car implements Comparable<Car> {
     private final String carBrand;
     private final String model;
     private final Integer pricePerDay;
