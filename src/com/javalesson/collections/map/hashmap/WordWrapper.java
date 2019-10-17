@@ -1,4 +1,4 @@
-package com.javalesson.collections.map;
+package com.javalesson.collections.map.hashmap;
 
 public class WordWrapper implements Comparable<WordWrapper> {
     private final String word;
