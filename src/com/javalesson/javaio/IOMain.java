@@ -5,16 +5,36 @@ import com.javalesson.collections.map.treemap.SubjectGrade;
 import com.javalesson.collections.map.treemap.TreeMapRunner;
 
 import java.io.*;
-import java.util.NavigableMap;
-import java.util.Set;
+import java.util.*;
 
 public class IOMain {
     private static final String FILE_NAME = "GradeBook.txt";
 
     public static void main(String[] args) throws IOException {
         NavigableMap<AverageStudentGrade, Set<SubjectGrade>> grades = TreeMapRunner.createGrades();
-        readFile(grades);
-        readFile();
+//        writeFile(grades);
+//        readFile();
+
+
+
+
+        Formatter formatter = new Formatter("BankAccounts.txt");
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Please enter client ID, client Name, client Surname, account balance");
+        int i = 0;
+        while (i < 3) {
+            try {
+                formatter.format("%d, %s, %s, %.2f%n", scanner.nextInt(), scanner.next(), scanner.next(), scanner.nextFloat());
+                i++;
+            } catch (InputMismatchException e) {
+                System.out.println("Input is incorrect. Please try again");
+                scanner.nextLine();
+            }
+        }
+        formatter.close();
+
+
     }
 
     private static void readFile() throws IOException {
@@ -25,8 +45,8 @@ public class IOMain {
         }
     }
 
-    private static void readFile(NavigableMap<AverageStudentGrade, Set<SubjectGrade>> grades) throws IOException {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_NAME))) {
+    private static void writeFile(NavigableMap<AverageStudentGrade, Set<SubjectGrade>> grades) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (AverageStudentGrade gradeKey : grades.keySet()) {
                 writer.write("=========================================\n");
                 writer.write("Students: " + gradeKey.getName() + " Average grade: " + gradeKey.getAverageGrade() + "\n");
@@ -37,4 +57,3 @@ public class IOMain {
         }
     }
 }
-
