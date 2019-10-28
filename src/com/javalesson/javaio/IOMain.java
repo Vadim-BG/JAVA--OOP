@@ -10,6 +10,7 @@ import java.util.*;
 public class IOMain {
     private static final String FILE_NAME = "GradeBook.txt";
     private static final String BINARY_FILE = "Students.bin";
+    private static final String BUFFERED_FILE = "Buffered.txt";
 
     public static void main(String[] args) throws IOException {
         SortedMap<AverageStudentGrade, Set<SubjectGrade>> grades = TreeMapRunner.createGrades();
@@ -22,8 +23,13 @@ public class IOMain {
 //        outputObjects(reader, BINARY_FILE);
 
         FileUtils utils = new FileUtils();
-        utils.printIOFileDetails("./");
-
+//        utils.printIOFileDetails("./");
+//        utils.printNioFileDetails(FILE_NAME);
+//        reader.readFileInFull(FILE_NAME);
+//        reader.nioReadFileWithBuffer(FILE_NAME);
+//        writer.nioWriteWithBuffer(BUFFERED_FILE);
+        reader.nioReadWithStream(FILE_NAME);
+        writer.nioWriteWithStream(BUFFERED_FILE);
 
     }
 
@@ -38,7 +44,7 @@ public class IOMain {
 
     private static void outputObjects(Reader reader, String fileName) {
         List<Student> students = reader.readObject(fileName);
-        for (Student student:students){
+        for (Student student : students) {
             System.out.printf("%s, %.2f %n", student.getName(), student.getAverageGrade());
             System.out.println(student.getGrades());
         }
