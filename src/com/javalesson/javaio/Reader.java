@@ -77,6 +77,7 @@ public class Reader {
     public void nioReadWithChannel(String fileName) throws IOException {
         RandomAccessFile file = new RandomAccessFile(fileName, "rw");
         FileChannel channel = file.getChannel();
+
         ByteBuffer buffer = ByteBuffer.allocate(100);
         int bytesNumber = channel.read(buffer);
         while (bytesNumber > 0) {
@@ -87,5 +88,6 @@ public class Reader {
             buffer.clear();
             bytesNumber = channel.read(buffer);
         }
+        channel.close();
     }
 }
