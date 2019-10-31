@@ -32,7 +32,8 @@ public class IOMain {
 //        writer.nioWriteWithStream(BUFFERED_FILE);
 
 //        reader.nioReadWithChannel(FILE_NAME);
-        writer.nioWriteWithChannel(BUFFERED_FILE);
+//        writer.nioWriteWithChannel(BUFFERED_FILE);
+        writer.writeWithRandomAccess(FILE_NAME);
 
     }
 
