@@ -70,15 +70,41 @@ public class FileUtils {
 
         Path parentPath = absolutePath.getParent();
         Path filesPath = parentPath.resolve("files");
-        if (Files.notExists(filesPath)){
+        if (Files.notExists(filesPath)) {
             Files.createDirectory(filesPath);
         }
-        Files.move(absolutePath,filesPath.resolve(path), StandardCopyOption.REPLACE_EXISTING);
+        Files.move(absolutePath, filesPath.resolve(path), StandardCopyOption.REPLACE_EXISTING);
         Files.delete(filesPath.resolve(path));
         Files.delete(filesPath);
 
-
-
-
     }
+
+    public void processDir() throws IOException {
+        Path dir = Paths.get("temp");
+        if (Files.notExists(dir)) {
+            Files.createDirectory(dir);
+        }
+        Files.createDirectories(Paths.get("temp/a/b/c"));
+
+        Files.createTempDirectory(dir, "tmp");
+
+        Iterable<Path> rootDirectories = FileSystems.getDefault().getRootDirectories();
+        for (Path rootdir : rootDirectories) {
+            System.out.println(rootdir);
+        }
+
+        DirectoryStream.Filter<Path> filter = new DirectoryStream.Filter<Path>() {
+            @Override
+            public boolean accept(Path entry) throws IOException {
+                return Files.isDirectory(entry);
+            }
+        };
+
+        try (DirectoryStream<Path> paths = Files.newDirectoryStream(dir,filter)) {
+            for(Path p : paths){
+                System.out.println(p);
+            }
+        }
+    }
+
 }
