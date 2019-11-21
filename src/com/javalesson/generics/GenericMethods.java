@@ -1,6 +1,9 @@
 package com.javalesson.generics;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 public class GenericMethods {
 
     public static void main(String[] args) {
@@ -14,9 +17,26 @@ public class GenericMethods {
 
         Integer max = findMax(intArray);
 
-        System.out.println("Max for array of Integers "+ max);
-        System.out.println("Max for array of Double "+findMax(doubleArray));
+        System.out.println("Max for array of Integers " + max);
+        System.out.println("Max for array of Double " + findMax(doubleArray));
 //        System.out.println("Max for array of String "+findMax(stringArray));
+
+        Number n = Integer.valueOf(20);
+        /*List<Number> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);*/
+
+
+
+        printElements(Arrays.asList(intArray));
+
+        MyBox<Integer> myBox = new MyBox<Integer>("");
+
+        Double aDouble = MyBox.returnValue(0.03);
+        System.out.println(aDouble);
+
 
     }
 
@@ -28,7 +48,7 @@ public class GenericMethods {
         System.out.println();
     }
 
-    private static  void printArray(Integer[] intArray) {
+    private static void printArray(Integer[] intArray) {
         System.out.println("Non generic method called");
         for (Integer element : intArray) {
             System.out.printf("%s, ", element);
@@ -37,15 +57,20 @@ public class GenericMethods {
     }
 
 
-
-    private static <T extends Number & Comparable<T>> T findMax (T[] array){
+    private static <T extends Number & Comparable<T>> T findMax(T[] array) {
         T max = array[0];
-        for (T e : array){
-           if (e.compareTo(max)>0){
-               max = e;
-           }
+        for (T e : array) {
+            if (e.compareTo(max) > 0) {
+                max = e;
+            }
         }
         return max;
+    }
+
+    private static void printElements(List<Number> list) {
+        for (Number n : list) {
+            System.out.println(n);
+        }
     }
 
 
