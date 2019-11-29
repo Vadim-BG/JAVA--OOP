@@ -31,14 +31,14 @@ public class LambdasMain {
             @Override
             public int compare(String s1, String s2) {
                 System.out.println("Hello world");
-                return s1.charAt(s1.length() - 1) - s2.charAt(s2.length() - 1);
+                return s1.charAt(s1.length() - 1) - s2.charAt(s2.length() - 2);
             }
         });
 
         System.out.println(Arrays.toString(colors));
 
         Arrays.sort(colors, (s1, s2) ->
-                s1.charAt(s1.length() - 1) - s2.charAt(s2.length() - 1)
+                s1.charAt(s1.length() - 1) - s2.charAt(s2.length() - 2)
         );
 
         Thread thread = new Thread(() -> {
