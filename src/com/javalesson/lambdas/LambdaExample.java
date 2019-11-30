@@ -38,7 +38,7 @@ public class LambdaExample {
         String s= "Hello ";
         Double d = 0.123;
 
-        TranformUtils<Double> doubleUtils = new TranformUtils<>();
+        /*TranformUtils<Double> doubleUtils = new TranformUtils<>();
         System.out.println(doubleUtils.transform(d, Math::sin));
 
         TranformUtils<String> stringUtils = new TranformUtils<>();
@@ -49,6 +49,10 @@ public class LambdaExample {
 
         System.out.println(stringUtils.transform(s, String::toUpperCase));
         System.out.println(stringUtils.transform(s, String::new));
+*/
+        LambdaScopeTest scope = new LambdaScopeTest();
+        LambdaScopeTest.LambdaScopeInner inner = scope.new LambdaScopeInner();
+        inner.testScope(9999.000);
 
 
 
