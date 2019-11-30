@@ -35,6 +35,22 @@ public class LambdaExample {
 
         TimeUtil.measure(()->Arrays.sort(createRandomArray()));
 
+        String s= "Hello ";
+        Double d = 0.123;
+
+        TranformUtils<Double> doubleUtils = new TranformUtils<>();
+        System.out.println(doubleUtils.transform(d, Math::sin));
+
+        TranformUtils<String> stringUtils = new TranformUtils<>();
+        System.out.println(stringUtils.transform(s, TranformUtils::exclaim));
+
+        String suffix = "Alex";
+        System.out.println(stringUtils.transform(suffix, s::concat));
+
+        System.out.println(stringUtils.transform(s, String::toUpperCase));
+        System.out.println(stringUtils.transform(s, String::new));
+
+
 
 //        TimeUtil.measure(someLongRunningMethod())
     }
