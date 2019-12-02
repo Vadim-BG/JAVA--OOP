@@ -1,5 +1,7 @@
 package com.javalesson.lambdas;
 
+import com.javalesson.lambdas.model.Circle;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,8 +13,22 @@ interface ElementProcessor<T extends Number> {
 }
 
 @FunctionalInterface
-interface ExecutiveFunction {
+interface Operation {
     void process();
+
+    static void measure(Operation function) {
+        long start = System.currentTimeMillis();
+        function.process();
+        long end = System.currentTimeMillis();
+        System.out.println("Time spent " + (end - start));
+    }
+
+    default Operation combineOperation(Operation that) {
+        return () -> {
+            process();
+            that.process();
+        };
+    }
 }
 
 public class LambdaExample {
@@ -30,15 +46,21 @@ public class LambdaExample {
         doubleList.add(4.13);
         doubleList.add(12.2);
 
-        processElements(intList, x -> Math.sin(x.doubleValue()));
-        processElements(doubleList, x -> Math.sin(x.doubleValue()));
+//        processElements(intList, x -> Math.sin(x.doubleValue()));
+//        processElements(doubleList, x -> Math.sin(x.doubleValue()));
+        Operation operation1 = () -> Arrays.sort(createRandomArray());
+        Operation operation2 = () -> Arrays.sort(createRandomArray());
+        Operation.measure(operation1.combineOperation(operation2));
 
-        TimeUtil.measure(()->Arrays.sort(createRandomArray()));
+        Circle circle = new Circle();
+        System.out.println(circle.calcSomething());
+    }
 
-        String s= "Hello ";
+    private static void processString() {
+        String s = "Hello ";
         Double d = 0.123;
 
-        /*TranformUtils<Double> doubleUtils = new TranformUtils<>();
+        TranformUtils<Double> doubleUtils = new TranformUtils<>();
         System.out.println(doubleUtils.transform(d, Math::sin));
 
         TranformUtils<String> stringUtils = new TranformUtils<>();
@@ -49,15 +71,14 @@ public class LambdaExample {
 
         System.out.println(stringUtils.transform(s, String::toUpperCase));
         System.out.println(stringUtils.transform(s, String::new));
-*/
         LambdaScopeTest scope = new LambdaScopeTest();
         LambdaScopeTest.LambdaScopeInner inner = scope.new LambdaScopeInner();
         inner.testScope(9999.000);
-
+    }
 
 
 //        TimeUtil.measure(someLongRunningMethod())
-    }
+
 
     private static <T extends Number> void processElements(List<T> intList, ElementProcessor function) {
         List<Double> doubleList = new ArrayList<>();
@@ -80,12 +101,5 @@ public class LambdaExample {
         return myArray;
     }
 
-    public static class TimeUtil {
-        private static void measure(ExecutiveFunction function) {
-            long start = System.currentTimeMillis();
-            function.process();
-            long end = System.currentTimeMillis();
-            System.out.println("Time spent " + (end - start));
-        }
-    }
+
 }
