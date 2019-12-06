@@ -1,21 +1,25 @@
-package com.javalesson.lambdas.model;
+package com.javalesson.streams;
 
 public class Employee {
 
+    private int id;
     private String fistName;
     private String lastName;
     private int salary;
 
-//    public Employee() {
-//    }
 
 
-    public Employee(String fistName, String lastName, int salary) {
+
+    public Employee(int id, String fistName, String lastName, int salary) {
+        this.id = id;
         this.fistName = fistName;
         this.lastName = lastName;
         this.salary = salary;
     }
 
+    public int getId() {
+        return id;
+    }
 
     public String getFistName() {
         return fistName;
@@ -36,6 +40,7 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
+                " ID='" + id + '\'' +
                 ", fistName='" + fistName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", salary=" + salary +

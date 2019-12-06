@@ -53,7 +53,7 @@ public class HigherOrderFunctionExample {
         Function<RichPerson, String> composedFunction = sayHello.compose(name);
         List<String> transformedList = transform(persons, composedFunction);
 
-        Function<String, String> exclaim = z -> z+"!!!";
+        Function<String, String> exclaim = z -> z + "!!!";
         Function<String, String> toUpper = String::toUpperCase;
 
         transform(transformedList, compose(toUpper, exclaim)).forEach(System.out::println);
@@ -80,7 +80,7 @@ public class HigherOrderFunctionExample {
     private static void testConsumer(List<RichPerson> persons) {
         System.out.println("Testing consumer....");
 //        f1.andThen(f2(x)) => f1(x) andThen f2(x);
-        Consumer<RichPerson> rise = x->x.setSalary(x.getSalary()*11/10);
+        Consumer<RichPerson> rise = x -> x.setSalary(x.getSalary() * 11 / 10);
         processList(persons, rise.andThen(System.out::println));
     }
 
