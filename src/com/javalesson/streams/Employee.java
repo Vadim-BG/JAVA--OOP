@@ -8,8 +8,6 @@ public class Employee {
     private int salary;
 
 
-
-
     public Employee(int id, String fistName, String lastName, int salary) {
         this.id = id;
         this.fistName = fistName;
@@ -45,5 +43,27 @@ public class Employee {
                 ", lastName='" + lastName + '\'' +
                 ", salary=" + salary +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Employee employee = (Employee) o;
+
+        if (id != employee.id) return false;
+        if (salary != employee.salary) return false;
+        if (fistName != null ? !fistName.equals(employee.fistName) : employee.fistName != null) return false;
+        return lastName != null ? lastName.equals(employee.lastName) : employee.lastName == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (fistName != null ? fistName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + salary;
+        return result;
     }
 }

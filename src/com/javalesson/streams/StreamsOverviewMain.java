@@ -26,8 +26,8 @@ public class StreamsOverviewMain {
         employeeList.add(new Employee(10, "Mike", "Yellow", 60000));
         employeeList.add(new Employee(11, "Victoria", "Pink", 75000));
 
-//        testStreamFormList();
-        testStreamFormFile();
+        testStreamFormList();
+//        testStreamFormFile();
 
     }
 
@@ -43,6 +43,13 @@ public class StreamsOverviewMain {
                 .map(StreamsOverviewMain::findById)
                 .filter(Objects::nonNull)
                 .findFirst();
+
+        int sum = Stream.of(ids)
+                .map(StreamsOverviewMain::findById)
+                .filter(Objects::isNull)
+                .mapToInt(Employee::getSalary)
+                .sum();
+        System.out.println(sum);
 
     }
 
