@@ -1,7 +1,7 @@
-package com.javalesson.concurrency;
+package com.javalesson.concurrency.threadslesson;
 
-import static com.javalesson.concurrency.ColorScheme.GREEN;
-import static com.javalesson.concurrency.ColorScheme.YELLOW;
+import static com.javalesson.concurrency.threadslesson.ColorScheme.GREEN;
+import static com.javalesson.concurrency.threadslesson.ColorScheme.YELLOW;
 
 public class ConcurrentMain {
 

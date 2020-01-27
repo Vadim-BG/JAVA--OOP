@@ -1,4 +1,4 @@
-package com.javalesson.concurrency;
+package com.javalesson.concurrency.threadslesson;
 
 public class ColorScheme {
 
